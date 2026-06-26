@@ -1,0 +1,605 @@
+/*
+ * Improved Design System CSS
+ * This file addresses inconsistencies, redundancies, and improves maintainability
+ * based on the analysis of the original design.
+ */
+
+ @tailwind base;
+ @tailwind components;
+ @tailwind utilities;
+ 
+ @layer base {
+   /* --- Global CSS Variables --- */
+   :root {
+     --font-sans: sans-serif; /* Example: Define a global font variable */
+     --radius: 0.875rem;
+
+     /* Precision Nexus palette — Deep Navy #0A192F, Electric Cyan #00F0FF */
+     --nexus-navy: 214 65% 11%;
+     --nexus-cyan: 183 100% 50%;
+ 
+     /* Common success, warning, error colors (identical across themes) */
+     --color-success: 142 71% 45%;
+     --color-warning: 48 96% 53%;
+     --color-error: 0 84% 60%;
+ 
+     /* Default link color */
+     --link: 216 56% 28%; /* Default to Fanar Light link color */
+ 
+     /* Default color scheme */
+     color-scheme: light;
+   }
+ 
+   /* --- Fanar Light Theme (Default) --- */
+   :root,
+   .light {
+     --background: 216 28% 98%;
+     --canvas: 216 28% 98%;
+     --foreground: 216 56% 12%;
+     --card: 0 0% 100%;
+     --card-foreground: 216 56% 12%;
+     --primary: 216 56% 18%;
+     --primary-foreground: 0 0% 100%;
+     --secondary: 216 25% 96%;
+     --secondary-foreground: 216 56% 12%;
+     --muted: 216 20% 96%;
+     --muted-foreground: 216 12% 42%;
+     --accent: 216 50% 24%;
+     --accent-foreground: 0 0% 100%;
+     --destructive: 0 72% 51%;
+     --destructive-foreground: 0 0% 100%;
+     --border: 216 18% 90%;
+     --input: 216 18% 90%;
+     --ring: 216 56% 28%;
+     --popover: 0 0% 100%;
+     --popover-foreground: 216 56% 12%;
+ 
+     /* Brand specific colors - Light */
+     --brand-accent: 216 56% 22%;
+     --brand-accent-muted: 216 45% 32%;
+     --brand-accent-subtle: 216 35% 42%;
+     --hero-bg: 216 56% 7%;
+ 
+     /* Shadow colors for glass effects */
+     --shadow-color-rgb: 0, 0, 0;
+     --shadow-opacity-light: 0.25;
+     --shadow-opacity-card-light: 0.12;
+   }
+ 
+   /* --- Fanar Night Blue Theme --- */
+   .night-blue,
+   .dark {
+     color-scheme: dark;
+     --background: 214 65% 11%;
+     --canvas: 214 65% 11%;
+     --foreground: 0 0% 98%;
+     --card: 214 55% 14%;
+     --card-foreground: 0 0% 96%;
+     --primary: 183 100% 50%;
+     --primary-foreground: 214 65% 11%;
+     --secondary: 214 45% 16%;
+     --secondary-foreground: 0 0% 94%;
+     --muted: 214 40% 15%;
+     --muted-foreground: 210 12% 62%;
+     --accent: 183 100% 50%;
+     --accent-foreground: 214 65% 11%;
+     --destructive: 0 62% 45%;
+     --destructive-foreground: 0 0% 100%;
+     --border: 214 35% 22%;
+     --input: 214 35% 18%;
+     --ring: 183 100% 50%;
+     --popover: 214 55% 14%;
+     --popover-foreground: 0 0% 96%;
+ 
+     /* Brand specific colors - Dark */
+     --brand-accent: 183 100% 50%;
+     --brand-accent-muted: 183 85% 60%;
+     --brand-accent-subtle: 183 70% 70%;
+     --hero-bg: 214 65% 8%;
+     --link: 183 100% 55%;
+ 
+     /* Shadow colors for glass effects */
+     --shadow-color-rgb: 0, 0, 0;
+     --shadow-opacity-light: 0.25;
+     --shadow-opacity-card-light: 0.12;
+   }
+ 
+   /* --- Dark Gray Theme --- */
+   .dark-gray {
+     color-scheme: dark;
+     --background: 220 9% 10%;
+     --canvas: 220 9% 10%;
+     --foreground: 0 0% 96%;
+     --card: 220 7% 14%;
+     --card-foreground: 0 0% 94%;
+     --primary: 0 0% 92%;
+     --primary-foreground: 220 9% 10%;
+     --secondary: 220 6% 17%;
+     --secondary-foreground: 0 0% 92%;
+     --muted: 220 6% 16%;
+     --muted-foreground: 220 5% 58%;
+     --accent: 220 5% 72%;
+     --accent-foreground: 220 9% 10%;
+     --destructive: 0 62% 45%;
+     --destructive-foreground: 0 0% 100%;
+     --border: 220 6% 20%;
+     --input: 220 6% 18%;
+     --ring: 220 6% 70%;
+     --popover: 220 7% 14%;
+     --popover-foreground: 0 0% 94%;
+ 
+     /* Brand specific colors - Dark Gray */
+     --brand-accent: 220 6% 75%;
+     --brand-accent-muted: 220 5% 65%;
+     --brand-accent-subtle: 220 4% 82%;
+     --hero-bg: 220 9% 8%;
+     --link: 220 8% 78%;
+ 
+     /* Shadow colors for glass effects */
+     --shadow-color-rgb: 0, 0, 0;
+     --shadow-opacity-light: 0.25;
+     --shadow-opacity-card-light: 0.12;
+   }
+ 
+   * {
+     @apply border-border;
+   }
+ 
+   html.night-blue,
+   html.dark,
+   html.dark-gray {
+     color-scheme: dark;
+   }
+ 
+   body {
+     @apply bg-background text-foreground antialiased;
+     /* Removed redundant background-color as @apply handles it */
+     overflow-x: clip;
+     transition: background-color 0.35s ease, color 0.35s ease;
+   }
+ 
+   a {
+     color: hsl(var(--link));
+     transition: color 0.2s ease;
+   }
+ 
+   a:hover {
+     color: hsl(var(--brand-accent));
+   }
+ 
+   :focus-visible {
+     @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+   }
+ 
+   a,
+   button,
+   input,
+   textarea,
+   select,
+   [role="button"] {
+     touch-action: manipulation;
+   }
+ }
+ 
+ @layer components {
+   /* --- Theme Zone Dark (for light mode structural zones) --- */
+   .light .theme-zone-dark,
+   :root:not(.night-blue):not(.dark-gray):not(.dark) .theme-zone-dark {
+     color-scheme: dark;
+     /* Inherit dark theme variables */
+     --background: 216 56% 7%;
+     --foreground: 0 0% 98%;
+     --card: 213 45% 11%;
+     --card-foreground: 0 0% 96%;
+     --primary: 210 35% 94%;
+     --primary-foreground: 216 56% 7%;
+     --secondary: 213 38% 14%;
+     --secondary-foreground: 0 0% 94%;
+     --muted: 213 32% 13%;
+     --muted-foreground: 210 12% 62%;
+     --accent: 214 45% 62%;
+     --accent-foreground: 216 56% 7%;
+     --border: 213 28% 19%;
+     --input: 213 28% 16%;
+     --ring: 214 50% 58%;
+     --popover: 213 45% 11%;
+     --popover-foreground: 0 0% 96%;
+     --brand-accent: 214 50% 58%;
+     --brand-accent-muted: 214 40% 68%;
+     --brand-accent-subtle: 214 35% 76%;
+     --link: 214 55% 68%;
+     --hero-bg: 216 56% 5%;
+     background-color: hsl(var(--hero-bg));
+     color: hsl(var(--foreground));
+   }
+ 
+   /* --- Hero Zone Backgrounds --- */
+   .hero-zone-bg {
+     background:
+       radial-gradient(circle at 50% 0%, hsl(var(--brand-accent) / 0.1), transparent 48%),
+       linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--hero-bg)) 100%); /* Used --background variable */
+   }
+ 
+   .dark-gray .hero-zone-bg {
+     background:
+       radial-gradient(circle at 50% 0%, hsl(var(--brand-accent) / 0.06), transparent 48%),
+       linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--hero-bg)) 100%); /* Used --background variable */
+   }
+ 
+   /* --- Landing Page Hero --- */
+   .landing-page {
+     isolation: isolate;
+   }
+ 
+   .landing-hero {
+     position: relative;
+     overflow: hidden;
+   }
+ 
+   .light .landing-hero {
+     background:
+       radial-gradient(ellipse 110% 90% at 50% -18%, hsl(var(--brand-accent) / 0.1), transparent 58%), /* Used --brand-accent */
+       linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--canvas)) 78%); /* Used --background */
+     color: hsl(var(--foreground));
+   }
+ 
+   /* Simplified: These should ideally inherit from general theme variables */
+   .light .landing-hero-title {
+     color: hsl(var(--foreground));
+   }
+ 
+   .light .landing-hero-badge {
+     color: hsl(var(--brand-accent));
+   }
+ 
+   .light .landing-hero-trust {
+     color: hsl(var(--muted-foreground));
+   }
+ 
+   .light .landing-hero-btn-outline {
+     border-color: hsl(var(--primary) / 0.32);
+     background-color: hsl(var(--card) / 0.72);
+     color: hsl(var(--foreground));
+   }
+ 
+   .light .landing-hero-btn-outline:hover {
+     border-color: hsl(var(--primary) / 0.5);
+     background-color: hsl(var(--primary) / 0.06);
+   }
+ 
+   .night-blue .landing-hero,
+   .dark-gray .landing-hero,
+   .dark .landing-hero {
+     color-scheme: dark;
+     /* Removed redundant variable redefinitions */
+     color: hsl(var(--foreground));
+     background:
+       radial-gradient(circle at 50% 0%, hsl(var(--brand-accent) / 0.11), transparent 48%), /* Used --brand-accent */
+       linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--hero-bg)) 100%); /* Used --background */
+   }
+ 
+   .night-blue .landing-hero-title,
+   .dark-gray .landing-hero-title,
+   .dark .landing-hero-title {
+     color: #ffffff; /* Specific override, consider if a variable is better */
+   }
+ 
+   .night-blue .landing-hero .nexus-gradient-text,
+   .dark-gray .landing-hero .nexus-gradient-text,
+   .dark .landing-hero .nexus-gradient-text {
+     background: linear-gradient(135deg, #ffffff 0%, hsl(var(--brand-accent-subtle)) 55%, hsl(var(--brand-accent-muted)) 100%); /* Used brand-accent variants */
+     -webkit-background-clip: text;
+     background-clip: text;
+     color: transparent;
+   }
+ 
+   .night-blue .landing-hero-btn-outline,
+   .dark-gray .landing-hero-btn-outline,
+   .dark .landing-hero-btn-outline {
+     border-color: hsl(var(--primary) / 0.45);
+     background-color: transparent;
+     color: hsl(var(--foreground));
+   }
+ 
+   .night-blue .landing-hero-btn-outline:hover,
+   .dark-gray .landing-hero-btn-outline:hover,
+   .dark .landing-hero-btn-outline:hover {
+     border-color: hsl(var(--primary) / 0.65);
+     background-color: hsl(var(--primary) / 0.08);
+   }
+ 
+   .night-blue .landing-hero::after,
+   .dark-gray .landing-hero::after,
+   .dark .landing-hero::after {
+     content: "";
+     position: absolute;
+     inset-inline: 0;
+     bottom: 0;
+     height: 6rem;
+     pointer-events: none;
+     background: linear-gradient(to bottom, transparent, hsl(var(--background)));
+   }
+ 
+   /* --- Landing Features --- */
+   .landing-features {
+     background: transparent;
+   }
+ 
+   .night-blue .landing-features,
+   .dark-gray .landing-features,
+   .dark .landing-features {
+     background-color: hsl(var(--background));
+   }
+ 
+   /* --- Auth Page Canvas --- */
+   .auth-page-canvas {
+     background-color: hsl(var(--canvas));
+   }
+ 
+   .light .auth-page-canvas {
+     background:
+       radial-gradient(ellipse 120% 80% at 50% -20%, hsl(var(--brand-accent) / 0.07), transparent 55%), /* Used --brand-accent */
+       linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--canvas)) 100%); /* Used --background */
+   }
+ 
+   /* --- Fanar Button Primary --- */
+   .fanar-btn-primary {
+     @apply bg-primary text-primary-foreground shadow-sm transition-all duration-300 hover:opacity-90;
+   }
+ 
+   /* --- Sanad Brand Mark --- */
+   .sanad-brand-icon {
+     background-color: #ffffff;
+     color: #08111f;
+     box-shadow:
+       0 1px 2px rgba(var(--shadow-color-rgb), 0.12),
+       inset 0 1px 0 rgba(255, 255, 255, 0.8);
+   }
+ 
+   .sanad-brand-wordmark {
+     font-weight: 700;
+     letter-spacing: -0.02em;
+     color: hsl(var(--foreground));
+   }
+ 
+   .theme-zone-dark .sanad-brand-wordmark,
+   .night-blue .sanad-brand-wordmark,
+   .dark-gray .sanad-brand-wordmark,
+   .dark .sanad-brand-wordmark {
+     background: linear-gradient(135deg, #ffffff 0%, hsl(var(--brand-accent-subtle)) 100%); /* Used brand-accent-subtle */
+     -webkit-background-clip: text;
+     background-clip: text;
+     color: transparent;
+   }
+ 
+   /* --- Partner & Fanar Logos --- */
+   .partner-logo {
+     filter: none !important;
+     opacity: 1;
+   }
+ 
+   .partner-logo--subtle {
+     opacity: 0.92;
+   }
+ 
+   /* --- Theme Segment --- */
+   .theme-segment {
+     @apply inline-flex rounded-lg border border-border/50 bg-muted/40 p-0.5;
+   }
+ 
+   .theme-segment-item {
+     @apply inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-all duration-200;
+     @apply text-muted-foreground hover:text-foreground;
+   }
+ 
+   .theme-segment-item-active {
+     background-color: hsl(var(--primary) / 0.12);
+     color: hsl(var(--foreground));
+     box-shadow: inset 0 0 0 1px hsl(var(--primary) / 0.28);
+   }
+ 
+   /* --- User Avatar Badge --- */
+   .user-avatar-badge {
+     background-color: hsl(var(--primary));
+     color: hsl(var(--primary-foreground));
+     font-weight: 600;
+   }
+ }
+ 
+ @layer utilities {
+   /* --- Nexus Grid Background --- */
+   .nexus-grid-bg {
+     background-color: hsl(var(--background));
+     background-image:
+       radial-gradient(circle at 50% 0%, hsl(var(--brand-accent) / 0.06), transparent 45%),
+       linear-gradient(hsl(var(--brand-accent) / 0.04) 1px, transparent 1px),
+       linear-gradient(90deg, hsl(var(--brand-accent) / 0.04) 1px, transparent 1px);
+     background-size: auto, 40px 40px, 40px 40px;
+   }
+ 
+   /* --- Glass Panel --- */
+   .glass-panel {
+     @apply bg-card/70 backdrop-blur-xl;
+     box-shadow:
+       inset 0 1px 0 rgba(255, 255, 255, 0.04),
+       0 8px 32px rgba(var(--shadow-color-rgb), var(--shadow-opacity-light)); /* Used shadow variables */
+     transition: background-color 0.35s ease, border-color 0.35s ease;
+   }
+ 
+   /* --- Glass Card --- */
+   .glass-card {
+     @apply rounded-2xl border border-border/40 bg-card/80 backdrop-blur-md;
+     box-shadow:
+       inset 0 1px 0 rgba(255, 255, 255, 0.03),
+       0 4px 24px rgba(var(--shadow-color-rgb), var(--shadow-opacity-card-light)); /* Used shadow variables */
+     transition: background-color 0.35s ease, border-color 0.35s ease;
+   }
+ 
+   /* --- Nexus Glow --- */
+   .nexus-glow {
+     box-shadow: 0 0 32px hsl(var(--nexus-cyan) / 0.25);
+   }
+ 
+   /* --- Nexus Gradient Text --- */
+   .nexus-gradient-text {
+     background: linear-gradient(
+       135deg,
+       hsl(var(--nexus-cyan)) 0%,
+       hsl(var(--brand-accent)) 50%,
+       hsl(var(--brand-accent-muted)) 100%
+     );
+     @apply bg-clip-text text-transparent;
+   }
+ 
+   .light :not(.theme-zone-dark) .nexus-gradient-text {
+     background: linear-gradient(
+       135deg,
+       hsl(216 56% 28%) 0%,
+       hsl(216 56% 18%) 50%,
+       hsl(216 45% 32%) 100%
+     );
+     @apply bg-clip-text text-transparent;
+   }
+ 
+   .theme-zone-dark .nexus-gradient-text {
+     background: linear-gradient(135deg, #ffffff 0%, hsl(var(--brand-accent-subtle)) 55%, hsl(var(--brand-accent-muted)) 100%); /* Used brand-accent variants */
+     @apply bg-clip-text text-transparent;
+   }
+ 
+   /* --- Brand Accent Colors --- */
+   .text-brand-accent {
+     color: hsl(var(--brand-accent));
+   }
+ 
+   .text-brand-accent-muted {
+     color: hsl(var(--brand-accent-muted));
+   }
+ 
+   .bg-brand-accent {
+     background-color: hsl(var(--brand-accent));
+   }
+ 
+   .border-brand-accent {
+     border-color: hsl(var(--brand-accent));
+   }
+ 
+   .bg-motif-layer {
+     color: hsl(var(--brand-accent));
+   }
+ 
+   /* --- Shimmer Effect --- */
+   .shimmer {
+     background: linear-gradient(
+       90deg,
+       hsl(var(--muted)) 0%,
+       hsl(var(--muted-foreground) / 0.15) 50%,
+       hsl(var(--muted)) 100%
+     );
+     background-size: 200% 100%;
+     animation: shimmer 1.5s ease-in-out infinite;
+   }
+ 
+   /* --- Skeleton Block --- */
+   .skeleton-block {
+     background: hsl(var(--muted));
+   }
+ 
+   @media (prefers-reduced-motion: no-preference) {
+     .skeleton-block {
+       background: linear-gradient(
+         90deg,
+         hsl(var(--muted)) 0%,
+         hsl(var(--muted-foreground) / 0.12) 50%,
+         hsl(var(--muted)) 100%
+       );
+       background-size: 200% 100%;
+       animation: shimmer 2s ease-in-out infinite;
+     }
+   }
+ 
+   @keyframes shimmer {
+     0% {
+       background-position: 200% 0;
+     }
+     100% {
+       background-position: -200% 0;
+     }
+   }
+ 
+   /* --- Scrolling Utilities --- */
+   .safe-scroll-x {
+     overflow-x: auto;
+     -webkit-overflow-scrolling: touch;
+   }
+ 
+   .responsive-table-wrap {
+     @apply safe-scroll-x max-w-full;
+   }
+ 
+   .touch-target {
+     @apply min-h-11 min-w-11;
+   }
+ 
+   .page-shell {
+     @apply mx-auto w-full max-w-4xl px-1 sm:px-2;
+   }
+ 
+   /* --- Legacy Cyan/Teal Harmonization (Refined) --- */
+   /* These classes are kept for compatibility but encourage migration to --brand-accent */
+   .text-cyan-200,
+   .text-cyan-300,
+   .text-cyan-400 {
+     color: hsl(var(--brand-accent));
+   }
+ 
+   .bg-cyan-300,
+   .bg-cyan-400,
+   .bg-cyan-500 {
+     background-color: hsl(var(--brand-accent));
+   }
+ 
+   .border-cyan-500\/20 {
+     border-color: hsl(var(--brand-accent) / 0.2);
+   }
+ 
+   .border-cyan-500\/30 {
+     border-color: hsl(var(--brand-accent) / 0.3);
+   }
+ 
+   .bg-cyan-500\/5 {
+     background-color: hsl(var(--brand-accent) / 0.05);
+   }
+ 
+   .bg-cyan-500\/10 {
+     background-color: hsl(var(--brand-accent) / 0.1);
+   }
+ 
+   .bg-cyan-500\/15 {
+     background-color: hsl(var(--brand-accent) / 0.15);
+   }
+ 
+   .ring-cyan-500\/30 {
+     --tw-ring-color: hsl(var(--brand-accent) / 0.3);
+   }
+ 
+   .from-cyan-400,
+   .from-cyan-500 {
+     --tw-gradient-from: hsl(var(--brand-accent)) var(--tw-gradient-from-position);
+     --tw-gradient-to: hsl(var(--brand-accent) / 0) var(--tw-gradient-to-position);
+     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+   }
+ 
+   .to-teal-400,
+   .to-teal-500 {
+     --tw-gradient-to: hsl(var(--brand-accent-muted)) var(--tw-gradient-to-position);
+   }
+ 
+   .hover\:from-cyan-400:hover {
+     --tw-gradient-from: hsl(var(--brand-accent-muted)) var(--tw-gradient-from-position);
+   }
+ 
+   .hover\:to-teal-400:hover {
+     --tw-gradient-to: hsl(var(--brand-accent-subtle)) var(--tw-gradient-to-position);
+   }
+ }
+ 

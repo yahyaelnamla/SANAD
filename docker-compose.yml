@@ -1,0 +1,125 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: sanad-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sanad}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sanad}
+      POSTGRES_DB: ${POSTGRES_DB:-sanad}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sanad} -d ${POSTGRES_DB:-sanad}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: sanad-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sanad-backend
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    environment:
+      ENVIRONMENT: development
+      DEBUG: "true"
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: ${POSTGRES_USER:-sanad}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sanad}
+      POSTGRES_DB: ${POSTGRES_DB:-sanad}
+      REDIS_URL: redis://redis:6379/0
+      CORS_ORIGINS: '["http://localhost:3000","http://localhost","http://127.0.0.1:3000"]'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app/backend
+      - ./config:/app/config
+      - ./agents:/app/agents
+      - ./rag:/app/rag
+      - ./alembic:/app/alembic
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health/live"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  celery-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sanad-celery
+    env_file:
+      - .env
+    entrypoint: ["./scripts/celery-entrypoint.sh"]
+    environment:
+      ENVIRONMENT: development
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: ${POSTGRES_USER:-sanad}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sanad}
+      POSTGRES_DB: ${POSTGRES_DB:-sanad}
+      REDIS_URL: redis://redis:6379/0
+    healthcheck:
+      disable: true
+    depends_on:
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app/backend
+      - ./config:/app/config
+      - ./agents:/app/agents
+      - ./rag:/app/rag
+
+  frontend:
+    image: node:20-alpine
+    container_name: sanad-frontend
+    working_dir: /app
+    command: >
+      sh -c "npm install &&
+      npm run dev -- -H 0.0.0.0 -p 3000"
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: ""
+      BACKEND_URL: http://backend:8000
+      PORT: "3000"
+      WATCHPACK_POLLING: "true"
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+      - frontend_next_cache:/app/.next
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/welcome"]
+      interval: 20s
+      timeout: 10s
+      retries: 6
+      start_period: 90s
+
+volumes:
+  postgres_data:
+  frontend_node_modules:
+  frontend_next_cache:

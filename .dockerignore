@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+coverage.xml
+.coverage
+
+# Node / frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+!frontend/.env.example
+
+# Git and IDE
+.git/
+.gitignore
+.cursor/
+*.md
+!README.md
+
+# Tests (not needed in production image)
+tests/
+
+# Docs (not needed in production image)
+docs/

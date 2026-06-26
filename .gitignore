@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+coverage.xml
+
+# Vite / frontend build cache
+.vite/
+*.tsbuildinfo
+
+# Node (frontend, Phase 5)
+node_modules/
+.next/
+out/
+
+# Docker
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Accidental root artifacts (npm/docker)
+/11.17.0
+/next
+/sanad-frontend@0.1.0
+/[frontend
+/docker
+
+# Secrets
+*.pem
+*.key
+credentials.json
