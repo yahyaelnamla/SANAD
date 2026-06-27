@@ -23,11 +23,14 @@ from backend.app.repositories.user_repository import UserRepository
 
 TEST_PASSWORD = "SecurePass123!"
 
-@pytest_asyncio.fixture          # ← was @pytest.fixture
+@pytest_asyncio.fixture
 async def seeded_knowledge(db_session):
-    """Seed minimal authenticated sources for knowledge graph/source tests."""
+    """Seed authenticated sources with chunks for retrieval tests."""
     from backend.app.models.enums import SourceType
     from backend.app.models.source import Source
+    from backend.app.models.source_chunk import SourceChunk
+
+    EMBEDDING_DIM = 3584  # Fanar embedding dimension
 
     for i in range(6):
         source = Source(
@@ -38,8 +41,18 @@ async def seeded_knowledge(db_session):
             is_authenticated=True,
         )
         db_session.add(source)
-    await db_session.flush()     # ← was commit(), flush keeps the outer transaction intact
+        await db_session.flush()  # get source.id before adding chunk
 
+        chunk = SourceChunk(
+            source_id=source.id,
+            content=f"Riba is prohibited in Islam. Islamic finance content {i}",
+            chunk_index=0,
+            embedding=[0.1] * EMBEDDING_DIM,
+        )
+        db_session.add(chunk)
+
+    await db_session.flush()
+    
 @pytest.fixture(autouse=True)
 def _test_env(monkeypatch: pytest.MonkeyPatch) -> None:
     """Ensure deterministic secrets and Fanar stubs for all tests."""
