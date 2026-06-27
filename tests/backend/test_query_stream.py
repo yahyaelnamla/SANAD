@@ -10,7 +10,7 @@ from backend.app.services.query_stream import chunk_summary_text, format_sse
 
 def test_chunk_summary_text_splits_words() -> None:
     chunks = chunk_summary_text("Riba is prohibited in Islam.")
-    assert chunks == ["Riba ", "is ", "prohibited ", "in ", "Islam. "]
+    assert chunks == ["Riba ", "is ", "prohibited ", "in ", "Islam."]
 
 
 def test_format_sse_event() -> None:

@@ -23,7 +23,22 @@ from backend.app.repositories.user_repository import UserRepository
 
 TEST_PASSWORD = "SecurePass123!"
 
+@pytest.fixture
+async def seeded_knowledge(db_session):
+    """Seed minimal authenticated sources for knowledge graph/source tests."""
+    from backend.app.models.source import Source
+    from backend.app.models.enums import SourceType
 
+    for i in range(6):
+        source = Source(
+            title=f"Test Source {i}",
+            content=f"Islamic finance content {i}",
+            source_type=SourceType.CLASSICAL,
+            is_authenticated=True,
+        )
+        db_session.add(source)
+    await db_session.commit()
+    
 @pytest.fixture(autouse=True)
 def _test_env(monkeypatch: pytest.MonkeyPatch) -> None:
     """Ensure deterministic secrets and Fanar stubs for all tests."""
