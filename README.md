@@ -778,16 +778,14 @@ Ensure the repository is clean and safe to publish:
 | **Large vendored trees** | Optional sparse checkout: `backend/app/tools/docling-main/` (~3800 files) |
 
 ```powershell
-# Initialize and first commit (after replacing <repo-url>)
+# Initialize and first commit 
 git init
 git add .
 git status   # verify .env is NOT listed
 git commit -m "SANAD: Fanar Hackathon 2026 submission"
-git remote add origin <repo-url>
+git remote add origin <https://github.com/yahyaelnamla/SANAD>
 git push -u origin main
 ```
-
-Update the CI badge in this README once your GitHub org/repo URL is known.
 
 ---
 
