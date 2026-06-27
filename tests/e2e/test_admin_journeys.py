@@ -1,7 +1,7 @@
 """End-to-end API journey: admin source review workflow."""
 
-import pytest
 import httpx
+import pytest
 
 
 @pytest.mark.e2e

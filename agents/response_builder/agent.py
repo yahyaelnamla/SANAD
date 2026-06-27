@@ -4,13 +4,13 @@ import os
 from pathlib import Path
 from typing import Any
 
-from config.fanar_api_keys import FANAR_MODELS
 from agents.common.fanar_client import FanarLLMClient
 from agents.intent_agent.models import IntentResult
 from agents.knowledge_agent.models import EvidenceBundle
 from agents.reasoning_agent.models import ReasoningResult
 from agents.response_builder.models import FinalResponse
 from agents.response_builder.tools import build_final_response, build_refusal_response
+from config.fanar_api_keys import FANAR_MODELS
 
 PROMPT_PATH = Path(__file__).parent / "prompt.md"
 

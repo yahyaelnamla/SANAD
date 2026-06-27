@@ -1,7 +1,7 @@
 """Integration tests for the explainability chain structure."""
 
-import pytest
 import httpx
+import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.app.models.enums import SourceType

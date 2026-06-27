@@ -2,12 +2,9 @@
 
 from typing import Any
 
-from agents.common.evidence import EvidenceItem
 from agents.knowledge_agent.models import EvidenceBundle
 from agents.reasoning_agent.models import ReasoningResult
 from agents.verification_agent.models import VerificationResult
-
-
 from agents.verification_agent.tools import is_generic_adilla_label
 
 

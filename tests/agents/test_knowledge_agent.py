@@ -5,10 +5,10 @@ import os
 import pytest
 
 from agents.common.evidence import EvidenceItem
-from tests.helpers.fanar_stub import DeterministicFanarClient
 from agents.intent_agent.models import IntentResult, IntentType
 from agents.knowledge_agent.agent import KnowledgeAgent
 from agents.retrieval_agent.models import RetrievalAgentResult
+from tests.helpers.fanar_stub import DeterministicFanarClient
 
 
 @pytest.fixture

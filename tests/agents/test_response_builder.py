@@ -5,12 +5,12 @@ import os
 import pytest
 
 from agents.common.evidence import EvidenceItem
-from tests.helpers.fanar_stub import DeterministicFanarClient
 from agents.intent_agent.models import IntentResult, IntentType
 from agents.knowledge_agent.models import EvidenceBundle, JurisprudentialPrinciple
 from agents.reasoning_agent.models import ReasoningResult, ScholarlyOpinion
 from agents.response_builder.agent import ResponseBuilder
 from agents.response_builder.tools import build_final_response, sanitize_user_text
+from tests.helpers.fanar_stub import DeterministicFanarClient
 
 
 @pytest.fixture

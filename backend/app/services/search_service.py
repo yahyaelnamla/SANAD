@@ -4,13 +4,12 @@ from urllib.parse import quote
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.app.utils.slugify import slugify
-
 from backend.app.repositories.query_repository import QueryRepository
-from backend.app.repositories.source_repository import SourceRepository
 from backend.app.repositories.response_repository import ResponseRepository
+from backend.app.repositories.source_repository import SourceRepository
 from backend.app.repositories.user_document_repository import UserDocumentRepository
 from backend.app.schemas.feature_schemas import GlobalSearchResponse, SearchResultItem
+from backend.app.utils.slugify import slugify
 
 COMPANY_HINTS = ("tesla", "nvidia", "apple", "microsoft", "amazon", "google", "meta", "bitcoin", "ethereum")
 

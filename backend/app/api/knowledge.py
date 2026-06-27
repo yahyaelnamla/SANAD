@@ -4,7 +4,10 @@ from fastapi import APIRouter, Query
 
 from backend.app.api.deps import CurrentUser, DbSession
 from backend.app.schemas.feature_schemas import KnowledgeBrowseResponse, KnowledgeGraphResponse
-from backend.app.services.knowledge_graph_service import browse_authenticated_sources, build_knowledge_graph
+from backend.app.services.knowledge_graph_service import (
+    browse_authenticated_sources,
+    build_knowledge_graph,
+)
 
 router = APIRouter(prefix="/knowledge", tags=["Knowledge"])
 

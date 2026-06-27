@@ -1,6 +1,5 @@
 """Tests for opinion comparison utilities."""
 
-import pytest
 
 from backend.app.utils.slugify import slugify
 

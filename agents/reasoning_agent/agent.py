@@ -3,14 +3,12 @@
 import os
 from pathlib import Path
 
-from backend.app.services.conversation_memory_service import format_history_for_prompt
-from config.fanar_api_keys import FANAR_MODELS
 from agents.common.fanar_client import FanarLLMClient
+from agents.common.opinion_validation import validate_and_ground_opinions
 from agents.financial_context_agent.models import FinancialContext
 from agents.intent_agent.models import IntentResult
 from agents.knowledge_agent.models import EvidenceBundle
 from agents.reasoning_agent.models import MadhhabPosition, ReasoningResult, ScholarlyOpinion
-from agents.common.opinion_validation import validate_and_ground_opinions
 from agents.reasoning_agent.tools import (
     build_analysis_from_payload,
     format_evidence_for_prompt,
@@ -21,6 +19,8 @@ from agents.reasoning_agent.tools import (
 )
 from agents.response_builder.tools import sanitize_user_text
 from agents.verification_agent.tools import normalize_adilla_from_evidence
+from backend.app.services.conversation_memory_service import format_history_for_prompt
+from config.fanar_api_keys import FANAR_MODELS
 
 PROMPT_PATH = Path(__file__).parent / "prompt.md"
 

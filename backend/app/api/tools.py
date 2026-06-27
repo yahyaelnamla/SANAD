@@ -6,7 +6,11 @@ import uuid
 from fastapi import APIRouter, File, Form, UploadFile
 from pydantic import BaseModel, Field
 
-from agents.common.fanar_client import FanarLLMClient, detect_speech_language, prepare_text_for_speech
+from agents.common.fanar_client import (
+    FanarLLMClient,
+    detect_speech_language,
+    prepare_text_for_speech,
+)
 from backend.app.api.deps import CurrentUser, DbSession
 from backend.app.exceptions import ValidationError
 from backend.app.schemas.feature_schemas import (

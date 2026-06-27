@@ -10,7 +10,10 @@ from backend.app.schemas.feature_schemas import (
     KnowledgeGraphResponse,
     KnowledgeSourceItem,
 )
-from backend.app.services.neo4j_graph_service import get_graph_from_neo4j_or_none, seed_neo4j_from_graph
+from backend.app.services.neo4j_graph_service import (
+    get_graph_from_neo4j_or_none,
+    seed_neo4j_from_graph,
+)
 
 # (id, label_en, label_ar, type, x, y)
 SEED_NODES: list[tuple[str, str, str, str, float, float]] = [

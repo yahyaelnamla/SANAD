@@ -5,11 +5,11 @@ import os
 import pytest
 
 from agents.common.evidence import EvidenceItem
-from tests.helpers.fanar_stub import DeterministicFanarClient
 from agents.financial_context_agent.models import FinancialContext
 from agents.intent_agent.models import IntentResult, IntentType
 from agents.knowledge_agent.models import EvidenceBundle, JurisprudentialPrinciple
 from agents.reasoning_agent.agent import ReasoningAgent
+from tests.helpers.fanar_stub import DeterministicFanarClient
 
 
 @pytest.fixture

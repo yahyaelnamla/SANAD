@@ -3,7 +3,6 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.app.api.deps import DbSession
 from backend.app.auth.dependencies import RequireAdmin, get_current_user
@@ -13,16 +12,16 @@ from backend.app.auth.schemas import (
     TokenResponse,
     UserProfileResponse,
 )
+from backend.app.models.user import User
+from backend.app.repositories.user_repository import UserRepository
+from backend.app.schemas.onboarding_schemas import OnboardingStatusResponse, OnboardingUpdateRequest
 from backend.app.schemas.user_preferences_schemas import (
     UserPreferencesSchema,
     UserPreferencesUpdateRequest,
 )
-from backend.app.schemas.onboarding_schemas import OnboardingStatusResponse, OnboardingUpdateRequest
+from backend.app.services.auth_service import AuthService
 from backend.app.services.onboarding_service import OnboardingService
 from backend.app.services.user_preferences_service import UserPreferencesService
-from backend.app.models.user import User
-from backend.app.repositories.user_repository import UserRepository
-from backend.app.services.auth_service import AuthService
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 

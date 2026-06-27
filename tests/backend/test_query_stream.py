@@ -6,7 +6,6 @@ import httpx
 import pytest
 
 from backend.app.services.query_stream import chunk_summary_text, format_sse
-from tests.backend.test_queries import auth_headers, seeded_knowledge
 
 
 def test_chunk_summary_text_splits_words() -> None:

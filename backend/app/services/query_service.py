@@ -17,7 +17,6 @@ from backend.app.models.user import User
 from backend.app.repositories.query_repository import QueryRepository
 from backend.app.repositories.response_repository import ResponseRepository
 from backend.app.repositories.user_repository import UserRepository
-from backend.app.services.user_preferences_service import UserPreferencesService
 from backend.app.schemas.query_schemas import (
     AgentTraceSchema,
     ConfidenceBreakdownSchema,
@@ -39,6 +38,7 @@ from backend.app.services.query_export import build_query_markdown
 from backend.app.services.query_trace_cache import clear as clear_live_trace
 from backend.app.services.query_trace_cache import get_draft_answer
 from backend.app.services.query_trace_cache import get_trace as get_live_trace
+from backend.app.services.user_preferences_service import UserPreferencesService
 
 logger = logging.getLogger(__name__)
 
@@ -396,7 +396,7 @@ async def process_query_background(query_id: uuid.UUID, request: QueryCreateRequ
         try:
             await service._run_pipeline(query, request)
             await session.commit()
-        except Exception as exc:
+        except Exception:
             logger.exception("Background query processing failed: %s", query_id)
             await session.rollback()
             async with AsyncSessionLocal() as fail_session:

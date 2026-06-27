@@ -1,9 +1,7 @@
 """Unit tests for document analysis service."""
 
-import io
 
 import pytest
-from pypdf import PdfReader
 
 from backend.app.exceptions import ValidationError
 from backend.app.services.document_service import analyze_pdf

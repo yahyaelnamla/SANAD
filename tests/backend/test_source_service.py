@@ -5,6 +5,7 @@ import uuid
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from backend.app.auth.security import hash_password
 from backend.app.exceptions import NotFoundError, ValidationError
 from backend.app.models.enums import SourceType, UserRole
 from backend.app.models.user import User
@@ -12,7 +13,6 @@ from backend.app.repositories.audit_log_repository import AuditLogRepository
 from backend.app.repositories.user_repository import UserRepository
 from backend.app.schemas.source_schemas import SourceCreateRequest, SourceUpdateRequest
 from backend.app.services.source_service import SourceService
-from backend.app.auth.security import hash_password
 
 
 @pytest.fixture

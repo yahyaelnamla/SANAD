@@ -3,12 +3,12 @@
 from pathlib import Path
 
 from agents.common.evidence import EvidenceItem
-from config.fanar_api_keys import FANAR_MODELS
 from agents.common.fanar_client import FanarLLMClient
 from agents.intent_agent.models import IntentResult
 from agents.knowledge_agent.models import EvidenceBundle, JurisprudentialPrinciple
 from agents.knowledge_agent.tools import infer_principles, is_valid_evidence
 from agents.retrieval_agent.models import RetrievalAgentResult
+from config.fanar_api_keys import FANAR_MODELS
 
 PROMPT_PATH = Path(__file__).parent / "prompt.md"
 

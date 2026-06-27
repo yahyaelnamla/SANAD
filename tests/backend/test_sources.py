@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.app.models.audit_log import AuditLog
 from backend.app.models.enums import UserRole
-from tests.conftest import TEST_PASSWORD, create_test_user, login_and_get_token
+from tests.conftest import create_test_user, login_and_get_token
 
 
 @pytest.mark.asyncio

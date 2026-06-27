@@ -2,8 +2,6 @@
 
 import pytest
 
-from tests.backend.test_queries import auth_headers, seeded_knowledge
-
 
 @pytest.mark.asyncio
 async def test_zakat_calculate(async_client, auth_headers: dict[str, str]) -> None:

@@ -2,8 +2,6 @@
 
 from pathlib import Path
 
-from backend.app.services.conversation_memory_service import format_history_for_prompt
-from config.fanar_api_keys import FANAR_MODELS
 from agents.common.fanar_client import FanarLLMClient
 from agents.intent_agent.models import IntentResult, IntentType
 from agents.intent_agent.tools import (
@@ -12,6 +10,8 @@ from agents.intent_agent.tools import (
     extract_entities,
     extract_keywords,
 )
+from backend.app.services.conversation_memory_service import format_history_for_prompt
+from config.fanar_api_keys import FANAR_MODELS
 
 PROMPT_PATH = Path(__file__).parent / "prompt.md"
 

@@ -2,7 +2,6 @@
 
 from pathlib import Path
 
-from config.fanar_api_keys import FANAR_MODELS
 from agents.common.fanar_client import FanarLLMClient
 from agents.knowledge_agent.models import EvidenceBundle
 from agents.reasoning_agent.models import ReasoningResult
@@ -13,6 +12,7 @@ from agents.verification_agent.tools import (
     check_hallucination_risk,
     check_opinion_citations,
 )
+from config.fanar_api_keys import FANAR_MODELS
 
 PROMPT_PATH = Path(__file__).parent / "prompt.md"
 

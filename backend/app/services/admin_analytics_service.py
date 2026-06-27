@@ -11,13 +11,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from backend.app.models.enums import QueryStatus
 from backend.app.models.query import Query
 from backend.app.models.response import Response
+from backend.app.repositories.source_repository import SourceRepository
 from backend.app.schemas.source_schemas import (
     AdminAnalyticsResponse,
     AdminDailyQueryCount,
     AdminModelUsage,
     AdminStatsResponse,
 )
-from backend.app.repositories.source_repository import SourceRepository
 
 
 class AdminAnalyticsService:

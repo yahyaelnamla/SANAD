@@ -5,10 +5,13 @@ from __future__ import annotations
 import logging
 import math
 import random
-from typing import Any
 
 from backend.app.config.settings import get_settings
-from backend.app.schemas.feature_schemas import GraphEdgeSchema, GraphNodeSchema, KnowledgeGraphResponse
+from backend.app.schemas.feature_schemas import (
+    GraphEdgeSchema,
+    GraphNodeSchema,
+    KnowledgeGraphResponse,
+)
 
 logger = logging.getLogger(__name__)
 

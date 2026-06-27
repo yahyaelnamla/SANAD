@@ -8,11 +8,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from backend.app.agents.agent_orchestrator import AgentOrchestrator
 from backend.app.models.enums import SourceType
 from rag.embeddings.embedding_generator import EmbeddingGenerator
+from rag.ingestion.base import IngestedDocument
 from rag.pipelines.ingestion_pipeline import IngestionPipeline
+from rag.pipelines.main_rag_pipeline import MainRAGPipeline
 from tests.helpers.embedding_stub import DeterministicEmbeddingModel
 from tests.helpers.fanar_stub import DeterministicFanarClient
-from rag.ingestion.base import IngestedDocument
-from rag.pipelines.main_rag_pipeline import MainRAGPipeline
 
 RIBA_TEXT = (
     "Riba (usury) is categorically prohibited in Islamic law. "

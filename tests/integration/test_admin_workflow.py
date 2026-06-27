@@ -1,7 +1,7 @@
 """Integration tests for admin source management workflow."""
 
-import pytest
 import httpx
+import pytest
 
 
 @pytest.mark.integration
@@ -53,8 +53,8 @@ async def test_reviewer_can_manage_sources(
     db_session,
 ) -> None:
     """Reviewer role has source management access."""
-    from tests.conftest import create_test_user, login_and_get_token
     from backend.app.models.enums import UserRole
+    from tests.conftest import create_test_user, login_and_get_token
 
     await create_test_user(db_session, email="reviewer@example.com", role=UserRole.REVIEWER)
     token = await login_and_get_token(async_client, "reviewer@example.com")

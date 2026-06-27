@@ -2,12 +2,10 @@
 
 from pathlib import Path
 
-import pytest
 from fastapi.testclient import TestClient
 
 from backend.app.workers.celery_app import celery_app
 from backend.app.workers.tasks import ping
-
 
 ROOT = Path(__file__).resolve().parents[2]
 

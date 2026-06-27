@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from config.fanar_api_keys import FANAR_MODELS
 from agents.common.fanar_client import FanarLLMClient
 from agents.intent_agent.models import IntentResult
 from agents.knowledge_agent.models import EvidenceBundle
 from agents.reasoning_agent.models import ReasoningResult
 from agents.reasoning_agent.tools import format_evidence_for_prompt
 from agents.response_builder.tools import sanitize_user_text
+from config.fanar_api_keys import FANAR_MODELS
 
 
 async def build_fast_reasoning(

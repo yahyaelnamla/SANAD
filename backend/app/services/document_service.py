@@ -12,7 +12,6 @@ from typing import Any
 from pypdf import PdfReader
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.app.services.docling_extractor import extract_pdf_text_with_docling
 from backend.app.exceptions import ValidationError
 from backend.app.models.user_document import UserDocument
 from backend.app.repositories.user_document_repository import UserDocumentRepository
@@ -27,6 +26,7 @@ from backend.app.schemas.feature_schemas import (
     DocumentPageHighlight,
     DocumentRevenueRow,
 )
+from backend.app.services.docling_extractor import extract_pdf_text_with_docling
 
 RIBA_KEYWORDS = (
     "riba",

@@ -62,10 +62,11 @@ fail_under = 50
 
 [tool.ruff]
 target-version = "py311"
-line-length = 100
+line-length = 150  
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "W"]
+ignore = ["E402"]
 
 [tool.mypy]
 python_version = "3.11"

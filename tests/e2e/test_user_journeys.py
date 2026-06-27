@@ -1,7 +1,7 @@
 """End-to-end API journey: user registration through query history."""
 
-import pytest
 import httpx
+import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.app.models.enums import SourceType
