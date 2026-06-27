@@ -63,7 +63,7 @@ describe("ExplainabilityPanel", () => {
 
   it("renders sources and execution metrics accordions", () => {
     render(<ExplainabilityPanel result={mockResult} />);
-    expect(screen.getByText("Sources (Evidence)")).toBeInTheDocument();
+    expect(screen.getByText("View Execution Trace")).toBeInTheDocument();
     expect(screen.getByText("Execution Metrics")).toBeInTheDocument();
   });
 
