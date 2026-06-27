@@ -11,15 +11,15 @@ class DeterministicFanarClient(FanarLLMClient):
 
     def __init__(self, api_key=None, timeout=None, **kwargs):
         super().__init__(api_key=api_key, base_url="https://test.fanar.local/v1")
-   
+
     def _split_thinking(self, raw: str) -> tuple[str, str]:    # ← add this method
         """Split thinking tags from raw response."""
         import re
         thinking_match = re.search(r"<thinking>(.*?)</thinking>", raw, re.DOTALL)
         thinking = thinking_match.group(1).strip() if thinking_match else ""
         clean = re.sub(r"<thinking>.*?</thinking>", "", raw, flags=re.DOTALL).strip()
-        return thinking, clean   
-    
+        return thinking, clean
+
     async def complete_json(
         self,
         *,
