@@ -23,7 +23,7 @@ from backend.app.repositories.user_repository import UserRepository
 
 TEST_PASSWORD = "SecurePass123!"
 
-@pytest.fixture
+@pytest_asyncio.fixture          # ← was @pytest.fixture
 async def seeded_knowledge(db_session):
     """Seed minimal authenticated sources for knowledge graph/source tests."""
     from backend.app.models.enums import SourceType
@@ -38,7 +38,7 @@ async def seeded_knowledge(db_session):
             is_authenticated=True,
         )
         db_session.add(source)
-    await db_session.commit()
+    await db_session.flush()     # ← was commit(), flush keeps the outer transaction intact
 
 @pytest.fixture(autouse=True)
 def _test_env(monkeypatch: pytest.MonkeyPatch) -> None:

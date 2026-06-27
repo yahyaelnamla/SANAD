@@ -35,7 +35,7 @@ async def test_stream_query_returns_sse_events(
         json={"question": "Is riba prohibited in Islam?", "language": "en"},
         headers=auth_headers,
     )
-    assert create_resp.status_code == 201
+    assert create_resp.status_code == 201, create_resp.json()
     query_id = create_resp.json()["query_id"]
 
     async with async_client.stream(
