@@ -52,7 +52,7 @@ async def seeded_knowledge(db_session):
         db_session.add(chunk)
 
     await db_session.flush()
-    
+
 @pytest.fixture(autouse=True)
 def _test_env(monkeypatch: pytest.MonkeyPatch) -> None:
     """Ensure deterministic secrets and Fanar stubs for all tests."""
