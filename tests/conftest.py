@@ -32,8 +32,9 @@ async def seeded_knowledge(db_session):
     for i in range(6):
         source = Source(
             title=f"Test Source {i}",
-            content=f"Islamic finance content {i}",
+            author="Test Author",
             source_type=SourceType.CLASSICAL,
+            language="en",
             is_authenticated=True,
         )
         db_session.add(source)
