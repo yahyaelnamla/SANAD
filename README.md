@@ -614,7 +614,39 @@ For hackathon judges:
 
 ## Screenshots and assets
 
-No binary screenshots are in the repository. See [docs/screenshots/README.md](docs/screenshots/README.md) for recommended captures.
+
+### Welcome
+![Welcome](docs/screenshots/welcome.png)
+
+### Login
+![Login](docs/screenshots/login.png)
+
+### Register
+![Register](docs/screenshots/register.png)
+
+### Chat Interface
+![Chat](docs/screenshots/chat.png)
+
+### Company Scanner
+![Company Scanner](docs/screenshots/company.png)
+
+### Portfolio Scanner
+![Portfolio Scanner](docs/screenshots/portfolio.png)
+
+### Zakat Calculator
+![Zakat Calculator](docs/screenshots/zakat.png)
+
+### Document OCR
+![Documents](docs/screenshots/documents.png)
+
+### Knowledge Graph
+![Knowledge Graph](docs/screenshots/knowledge-graph.png)
+
+### Evaluation Harness
+![Evaluation](docs/screenshots/evaluation.png)
+
+### Settings
+![Settings](docs/screenshots/settings.png)
 
 Icons: `frontend/public/icons/` (Fanar2.svg, QCRI.svg, hbku.svg, PWA icons).
 
